@@ -13,6 +13,7 @@ const db1 = sql.createConnection({
 })
 db1.query(`SHOW DATABASES LIKE '${process.env.DATABASE1}';`, (error, result) => 
 {
+    console.log("A");
     if (error || result.length == 0)
     {
         db1.query(`CREATE DATABASE ${process.env.DATABASE1}`, (error, result) => {
