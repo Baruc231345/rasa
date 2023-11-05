@@ -551,8 +551,8 @@ router.get("/pdf1/:id", async (req, res) => {
           `PDF successfully generated and saved in pdf-folders. RasaId = ${rasaID}`
         );
         res.download(filePath);
-      }*/
     });
+      }*/
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while generating PDF");
