@@ -525,7 +525,7 @@ router.get("/pdf1/:id", async (req, res) => {
   const url = `http://154.41.254.18:3306/ejsrasaVanilla/${rasaID}`;
 
   try {
-    const browser = await puppeteer.launch({ headless: true, executablePath: './chromadriver'});
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "load" });
     const pdfBuffer = await page.pdf();
