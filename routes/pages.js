@@ -539,6 +539,7 @@ router.get("/pdf1/:id", async (req, res) => {
     }
     fs.writeFileSync(filePath, pdfBuffer);
     res.download(filePath, (error) => {
+      console.log(filePath);
       fs.unlinkSync(filePath);
     });
     /*
