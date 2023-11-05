@@ -532,8 +532,8 @@ router.get("/pdf1/:id", async (req, res) => {
     await browser.close();
 
     const pdfFileName = `rasa_${rasaID}.pdf`;
-    const filePath = path.join(__dirname, "public", "pdf2-folders", pdfFileName);
-    const directoryPath = path.join(__dirname, "public", "pdf2-folders");
+    const filePath = path.join(__dirname, "public", "pdf-folders", pdfFileName);
+    const directoryPath = path.join(__dirname, "public", "pdf-folders");
     if (!fs.existsSync(directoryPath)) {
       fs.mkdirSync(directoryPath, { recursive: true });
     }
