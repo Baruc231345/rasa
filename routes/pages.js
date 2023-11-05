@@ -532,14 +532,15 @@ router.get("/pdf1/:id", async (req, res) => {
     await browser.close();
 
     const pdfFileName = `rasa_${rasaID}.pdf`;
-    const filePath = path.join(__dirname, "public", "pdf-folders", pdfFileName);
-    const directoryPath = path.join(__dirname, "public", "pdf-folders");
+    const filePath = path.join(__dirname, "public", "pdf2-folders", pdfFileName);
+    const directoryPath = path.join(__dirname, "public", "pdf2-folders");
     if (!fs.existsSync(directoryPath)) {
       fs.mkdirSync(directoryPath, { recursive: true });
     }
     fs.writeFileSync(filePath, pdfBuffer);
-    res.download(filePath);
-
+    res.download(filePath, (error) => {
+      fs.unlinkSync(filePath);
+    });
     /*
      const sql = "UPDATE inputted_table SET pdf = ? WHERE id = ?";
     db1.query(sql, [pdfFileName, rasaID], function (error, result) {
