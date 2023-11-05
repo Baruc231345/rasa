@@ -538,8 +538,10 @@ router.get("/pdf1/:id", async (req, res) => {
       fs.mkdirSync(directoryPath, { recursive: true });
     }
     fs.writeFileSync(filePath, pdfBuffer);
+    res.download(filePath);
 
-    const sql = "UPDATE inputted_table SET pdf = ? WHERE id = ?";
+    /*
+     const sql = "UPDATE inputted_table SET pdf = ? WHERE id = ?";
     db1.query(sql, [pdfFileName, rasaID], function (error, result) {
       if (error) {
         console.error(error);
@@ -549,7 +551,7 @@ router.get("/pdf1/:id", async (req, res) => {
           `PDF successfully generated and saved in pdf-folders. RasaId = ${rasaID}`
         );
         res.download(filePath);
-      }
+      }*/
     });
   } catch (error) {
     console.error(error);
