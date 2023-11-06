@@ -14,9 +14,9 @@ const router = express.Router();
 const multer = require("multer");
 const db1 = require("../routes/rasa-db");
 const { default: puppeteer } = require("puppeteer");
+let universalId = null;
 const storage = multer.memoryStorage();
 const crypto = require('crypto'); 
-const encryptionKey = crypto.randomBytes(32);
 router.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 
