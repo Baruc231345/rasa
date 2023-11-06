@@ -91,11 +91,10 @@
                           <%= data.rasa_status %>
                       </td>
                       <td>
-                        <td>
                           <button class="btn btn-sm btn-primary"
-                              onclick="window.location.href='/pdf2/<%= encryptId(data.id) %>'">Download PDF</button>
+                              onclick="window.location.href='/pdf2/<%= data.hashedId %>'">Download PDF</button>
                           <button class="btn btn-sm btn-primary"
-                              onclick="window.location.href='/ejsrasaVanilla/<%= encryptId(data.id) %>'">Open Form</button>
+                              onclick="window.location.href='/ejsrasaVanilla/<%= data.hashedId %>'">Open Form</button>
                       </td>
                       </td>
                       </tr>
@@ -108,16 +107,6 @@
                   </tbody>
               </table>
           </div>
-          <script>
-          
-          function encryptId(id) {
-            const encryptionKey = crypto.randomBytes(32); // 32-byte (256-bit) random key
-            const iv = crypto.randomBytes(16); // Initialization vector
-            const cipher = crypto.createCipheriv('aes-256-cbc', encryptionKey, iv);
-            let encryptedId = cipher.update(id.toString(), 'utf8', 'hex');
-            encryptedId += cipher.final('hex');
-            return encryptedId;
-          }
-          </script>
+          <script src="./js/rasa_view.js"></script>
       </body>
   </html>

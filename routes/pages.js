@@ -16,24 +16,23 @@ const db1 = require("../routes/rasa-db");
 const { default: puppeteer } = require("puppeteer");
 let universalId = null;
 const storage = multer.memoryStorage();
-const crypto = require('crypto'); 
 router.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 
 console.log(__dirname);
 
+const crypto = require('crypto');
+
+// Create a single encryption key and IV when your application starts
+const encryptionKey = crypto.randomBytes(32); // 32-byte (256-bit) random key
+const iv = crypto.randomBytes(16); // Initialization vector
 function encryptId(id) {
-  const encryptionKey = crypto.randomBytes(32); // 32-byte (256-bit) random key
-  const iv = crypto.randomBytes(16); // Initialization vector
   const cipher = crypto.createCipheriv('aes-256-cbc', encryptionKey, iv);
   let encryptedId = cipher.update(id.toString(), 'utf8', 'hex');
   encryptedId += cipher.final('hex');
   return encryptedId;
 }
-
 function decryptId(encryptedId) {
-  const encryptionKey = crypto.randomBytes(32); // 32-byte (256-bit) random key
-  const iv = crypto.randomBytes(16); // Initialization vector
   const decipher = crypto.createDecipheriv('aes-256-cbc', encryptionKey, iv);
   let decryptedId = decipher.update(encryptedId, 'hex', 'utf8');
   decryptedId += decipher.final('utf8');
