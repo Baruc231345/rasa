@@ -88,11 +88,11 @@
                           <%= data.rasa_status %>
                       </td>
                       <td>
-                          <button class="btn btn-sm btn-primary"
-                              onclick="window.location.href='/pdf2/<%= data.encryptedId %>'">Download PDF</button>
-                          <button class="btn btn-sm btn-primary"
-                              onclick="window.location.href='/ejsrasaVanilla/<%= data.encryptedId %>'">Open Form</button>
-                      </td>
+                        <button class="btn btn-sm btn-primary"
+                            onclick="console.log('Download PDF clicked:', '<%= data.encryptedId %>'); window.location.href='/pdf2/<%= data.encryptedId %>'">Download PDF</button>
+                        <button class="btn btn-sm btn-primary"
+                            onclick="console.log('Open Form clicked:', '<%= data.encryptedId %>'); window.location.href='/ejsrasaVanilla2/<%= data.encryptedId %>'">Open Form</button>
+                    </td>
                       </td>
                       </tr>
                       <% }); } else { %>
