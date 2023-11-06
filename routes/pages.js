@@ -24,15 +24,17 @@ console.log(__dirname);
 
 function encryptId(id) {
   const encryptionKey = 'Testing101';
-  const cipher = crypto.createCipher('aes-256-cbc', encryptionKey);
-  let encryptedId = cipher.update(id, 'utf8', 'hex');
+  const iv = Buffer.alloc(16, 0); // Initialization vector
+  const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(encryptionKey), iv);
+  let encryptedId = cipher.update(id.toString(), 'utf8', 'hex');
   encryptedId += cipher.final('hex');
   return encryptedId;
 }
 
 function decryptId(encryptedId) {
   const encryptionKey = 'Testing101';
-  const decipher = crypto.createDecipher('aes-256-cbc', encryptionKey);
+  const iv = Buffer.alloc(16, 0); // Initialization vector
+  const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(encryptionKey), iv);
   let decryptedId = decipher.update(encryptedId, 'hex', 'utf8');
   decryptedId += decipher.final('utf8');
   return decryptedId;

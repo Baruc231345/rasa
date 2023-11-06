@@ -91,10 +91,12 @@
                           <%= data.rasa_status %>
                       </td>
                       <td>
+                        <td>
                           <button class="btn btn-sm btn-primary"
-                              onclick="window.location.href='/pdf2/<%= hashedId %>'">Download PDF</button>
+                              onclick="window.location.href='/pdf2/<%= encryptId(data.id) %>'">Download PDF</button>
                           <button class="btn btn-sm btn-primary"
-                              onclick="window.location.href='/ejsrasaVanilla2/<%= hashedId %>'">Open Form</button>
+                              onclick="window.location.href='/ejsrasaVanilla/<%= encryptId(data.id) %>'">Open Form</button>
+                      </td>
                       </td>
                       </tr>
                       <% }); } else { %>
@@ -107,14 +109,14 @@
               </table>
           </div>
           <script>
-              function encryptId(id) {
-                  const encryptionKey = 'Testing101';
-                  const crypto = require('crypto');
-                  const cipher = crypto.createCipher('aes-256-cbc', encryptionKey);
-                  let encryptedId = cipher.update(id.toString(), 'utf8', 'hex');
-                  encryptedId += cipher.final('hex');
-                  return encryptedId;
-              }
+            function encryptId(id) {
+              const encryptionKey = 'Testing101';
+              const iv = Buffer.alloc(16, 0); // Initialization vector
+              const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(encryptionKey), iv);
+              let encryptedId = cipher.update(id.toString(), 'utf8', 'hex');
+              encryptedId += cipher.final('hex');
+              return encryptedId;
+            }
           </script>
       </body>
   </html>
