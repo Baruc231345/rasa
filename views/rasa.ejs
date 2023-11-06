@@ -318,159 +318,35 @@ window.onload = function() {
   formatDate();
 };
 const universalId = '<%= id %>';
-const checkbox = document.getElementById('myRadioId-6');
-const startTimeInput = document.getElementById('start-time');
-const endTimeInput = document.getElementById('end-time');
-checkbox.addEventListener('change', function() {  
-  if (this.checked) {
-    startTimeInput.disabled = false;
-    endTimeInput.disabled = false;
-  } else {
-    startTimeInput.disabled = true;
-    endTimeInput.disabled = true;
-  }
-});
-checkbox.addEventListener('change', function() {
-  if (!this.checked) {
-    startTimeInput.value = '';
-    endTimeInput.value = '';
-  }
-});
 
-const checkbox2 = document.getElementById('myRadioId-7');
-const otherInput = document.getElementById('otherInput');
-checkbox2.addEventListener('change', function() {  
-  if (this.checked) {
-    otherInput.disabled = false;
-  } else {
-    otherInput.disabled = true;
-  }
-});
-checkbox2.addEventListener('change', function() {
-  if (!this.checked) {
-    otherInput.value = '';
-  }
-});
+function setupCheckboxBehavior(checkboxId, inputId) {
+  const checkbox = document.getElementById(checkboxId);
+  const input = document.getElementById(inputId);
 
-const checkbox3 = document.getElementById('myRadioId-4');
-const whiteboardInput = document.getElementById('whiteboard_input');
-checkbox3.addEventListener('change', function() {  
-  if (this.checked) {
-    whiteboardInput.disabled = false;
-  } else {
-    whiteboardInput.disabled = true;
-  }
-});
-checkbox3.addEventListener('change', function() {
-  if (!this.checked) {
-    whiteboardInput.value = '';
-  }
-});
+  checkbox.addEventListener('change', function () {
+    input.disabled = !this.checked;
+    if (!this.checked) {
+      input.value = '';
+      input.required = false;
+    } else {
+      input.required = true;
+    }
+  });
+}
 
-const checkbox4 = document.getElementById('myRadioId-3');
-const blackpanelInput = document.getElementById('black-panel_input');
-checkbox4.addEventListener('change', function() {  
-  if (this.checked) {
-    blackpanelInput.disabled = false;
-  } else {
-    blackpanelInput.disabled = true;
-  }
-});
-checkbox4.addEventListener('change', function() {
-  if (!this.checked) {
-    blackpanelInput.value = '';
-  }
-});
+// Set up behavior for each checkbox and input field combination
+setupCheckboxBehavior('myRadioId-6', 'start-time');
+setupCheckboxBehavior('myRadioId-6', 'end-time');
+setupCheckboxBehavior('myRadioId-7', 'otherInput');
+setupCheckboxBehavior('myRadioId-4', 'whiteboard_input');
+setupCheckboxBehavior('myRadioId-3', 'black-panel_input');
+setupCheckboxBehavior('myRadioId-2', 'table_input');
+setupCheckboxBehavior('myRadioId-1', 'chair_input');
+setupCheckboxBehavior('myRadioId_4', 'wide-screen_input');
+setupCheckboxBehavior('myRadioId_3', 'lcd-projector_input');
+setupCheckboxBehavior('myRadioId_2', 'microphone_input');
+setupCheckboxBehavior('myRadioId-1', 'sound-system_input');
 
-const checkbox5 = document.getElementById('myRadioId-2');
-const tableInput = document.getElementById('table_input');
-checkbox5.addEventListener('change', function() {  
-  if (this.checked) {
-    tableInput.disabled = false;
-  } else {
-    tableInput.disabled = true;
-  }
-});
-checkbox5.addEventListener('change', function() {
-  if (!this.checked) {
-    tableInput.value = '';
-  }
-});
-
-const checkbox6 = document.getElementById('myRadioId-1');
-const chairInput = document.getElementById('chair_input');
-checkbox6.addEventListener('change', function() {  
-  if (this.checked) {
-    chairInput.disabled = false;
-  } else {
-    chairInput.disabled = true;
-  }
-});
-checkbox6.addEventListener('change', function() {
-  if (!this.checked) {
-    chairInput.value = '';
-  }
-});
-
-const checkbox7 = document.getElementById('myRadioId_4');
-const widescreenInput = document.getElementById('wide-screen_input');
-checkbox7.addEventListener('change', function() {  
-  if (this.checked) {
-    widescreenInput.disabled = false;
-  } else {
-    widescreenInput.disabled = true;
-  }
-});
-checkbox7.addEventListener('change', function() {
-  if (!this.checked) {
-    widescreenInput.value = '';
-  }
-});
-
-const checkbox8 = document.getElementById('myRadioId_3');
-const lcdprojectorInput = document.getElementById('lcd-projector_input');
-checkbox8.addEventListener('change', function() {  
-  if (this.checked) {
-    lcdprojectorInput.disabled = false;
-  } else {
-    lcdprojectorInput.disabled = true;
-  }
-});
-checkbox8.addEventListener('change', function() {
-  if (!this.checked) { 
-    lcdprojectorInput.value = '';
-  }
-});
-
-const checkbox9 = document.getElementById('myRadioId_2');
-const microphoneInput = document.getElementById('microphone_input');
-checkbox9.addEventListener('change', function() {  
-  if (this.checked) {
-    microphoneInput.disabled = false;
-  } else {
-    microphoneInput.disabled = true;
-  }
-});
-checkbox9.addEventListener('change', function() {
-  if (!this.checked) { 
-    microphoneInput.value = '';
-  }
-});
-
-const checkbox10 = document.getElementById('myRadioId_1');
-const soundsystemInput = document.getElementById('sound-system_input');
-checkbox10.addEventListener('change', function() {  
-  if (this.checked) {
-    soundsystemInput.disabled = false;
-  } else {
-    soundsystemInput.disabled = true;
-  }
-});
-checkbox10.addEventListener('change', function() {
-  if (!this.checked) { 
-    soundsystemInput.value = '';
-  }
-});
 const imageInput = document.querySelector("#image_input");
 const imageInput2 = document.querySelector("#image_input2");
 var uploadImage = "";
