@@ -69,34 +69,33 @@
                     const encryptedId = encryptId(data.id);
                     %>
                     <tr>
-                        <td>
-                            <%= encryptedId %>
-                        </td>
-                        <td>
-                            <%= data.full_name %>
-                        </td>
-                        <td>
-                            <%= eventDay %>
-                        </td>
-                        <td>
-                            <%= data.event_description %>
-                        </td>
-                        <td>
-                            <%= data.start_time %>
-                        </td>
-                        <td>
-                            <%= data.end_time %>
-                        </td>
-                        <td>
-                            <%= data.rasa_status %>
-                        </td>
-
-                        <td>
-                            <button class="btn btn-sm btn-primary"
-                                onclick="window.location.href='/pdf2/<%= encryptedId %>'">Download PDF</button>
-                            <button class="btn btn-sm btn-primary"
-                                onclick="window.location.href='/ejsrasaVanilla/<%= encryptedId %>'">Open Form</button>
-                        </td>
+                      <td>
+                        <%= encryptedId %>
+                    </td>
+                    <td>
+                        <%= data.full_name %>
+                    </td>
+                    <td>
+                        <%= eventDay %>
+                    </td>
+                    <td>
+                        <%= data.event_description %>
+                    </td>
+                    <td>
+                        <%= data.start_time %>
+                    </td>
+                    <td>
+                        <%= data.end_time %>
+                    </td>
+                    <td>
+                        <%= data.rasa_status %>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-primary"
+                            onclick="window.location.href='/pdf2/<%= encryptedId %>'">Download PDF</button>
+                        <button class="btn btn-sm btn-primary"
+                            onclick="window.location.href='/ejsrasaVanilla/<%= encryptedId %>'">Open Form</button>
+                    </td>
                     </tr>
                     <% }); } else { %>
                         <tr>

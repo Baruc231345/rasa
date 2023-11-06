@@ -556,12 +556,10 @@ router.get("/pdf1/:id", async (req, res) => {
   }
 });
 
-router.get("/pdf2/:encryptedId", async (req, res) => {
+router.get("/pdf2/:hashedId", async (req, res) => {
   const puppeteer = require("puppeteer");
-  const encryptedId = req.params.encryptedId; // Get the encrypted ID from the URL
-
-  // Decrypt the encrypted ID using your decryption function
-  const rasaID = decryptId(encryptedId); // Replace with your decryption function
+  const hashedId = req.params.hashedId;
+  const rasaID = decryptId(hashedId);
 
   if (rasaID === null) {
     return res.status(400).send("Invalid encrypted ID");
