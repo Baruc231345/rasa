@@ -56,16 +56,16 @@
                   <div class="fields1">
                     <div class="input-field">
                       <label>Full Name</label>
-                      <input type="text" id="full_name" placeholder="Enter your name" >
+                      <input type="text" id="full_name" placeholder="Enter your name" required >
                     </div>
                     <div class="input-field">
                       <label>Contact Number </label>
-                      <input type="text" id="contact_number" placeholder="Enter your mobile number" >
+                      <input type="text" id="contact_number" placeholder="Enter your mobile number"  required>
                     </div>
                     <div class="input-field">
                       <label for="requestor_information">Requestor Information</label>
                       <div class="select-wrapper">
-                        <select id="requestor_information" onchange="updateContactLabel()">
+                        <select id="requestor_information" onchange="updateContactLabel()" required>
                           <option value="" disabled selected>Select Description</option>
                           <option value="Student_Leader">Student Leader</option>
                           <option value="Student">Student</option>
@@ -82,21 +82,21 @@
                   </div>
                 </div>
               <div class="form second">
-                <div class="details personal">
+                <div class="details personal" required>
                   <span class="title">Event Information</span>
                   <div class="fields2">
-                    <div class="input-field">
+                    <div class="input-field" required>
                       <label>Event Name</label>
                       <input type="text" id="event_name" placeholder="Enter Event Name" >
                     </div>
-                    <div class="input-field">
+                    <div class="input-field" required>
                       <label>Event Date/Day</label>
                       <input type="date" id="event_day" value = "10/13/2023" onchange="formatDate()" >
                     </div>
-                    <div class="input-field">
+                    <div class="input-field" required>
                       <label for="event_description">Event Description</label>
                       <div class="select-wrapper">
-                        <select id="event_description">
+                        <select id="event_description" >
                           <option value="" disabled selected>Select Description</option>
                           <option value="Seminar">Seminar</option>
                           <option value="Show">Show</option>
@@ -107,12 +107,12 @@
                     </div>
                     <div class="input-field">
                       <label>Purpose/Objective</label>
-                      <input type="text" id="purpose_objectives" placeholder="Specify the purpose" >
+                      <input type="text" id="purpose_objectives" placeholder="Specify the purpose" required>
                     </div>
                     
                     <div class="input-field" style="width: 300px;">
                       <label>Expected Participants</label>
-                      <input type="number" id="participants" placeholder="# of Participants" >
+                      <input type="number" id="participants" placeholder="# of Participants" required>
                     </div>
 
                     <div class="input-field" style="width: 380px;"> 
@@ -121,11 +121,11 @@
                     </div>
                     <div class="input-field">
                       <label>Start Time</label>
-                      <input type="time" id = "start_time" placeholder="include set-up time or ingress">
+                      <input type="time" id = "start_time" placeholder="include set-up time or ingress" required>
                     </div>
                     <div class="input-field">
                       <label for="end_time">End Time</label>
-                      <input type="time" id="end_time" name="end_time" placeholder="Include break-down time or egress">
+                      <input type="time" id="end_time" name="end_time" placeholder="Include break-down time or egress" required>
                     </div>
                     </div>  
                 <div class="mid">
