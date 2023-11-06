@@ -167,7 +167,7 @@ router.get("/ejsrasaVanilla/:id", (req, res) => {
 });
 
 
-router.get("/ejsrasaVanilla2/:hashedId/", (req, res) => {
+router.get("/ejsrasaVanilla2/:hashedId", (req, res) => {
   const hashedId = req.params.hashedId; 
   const universalId = req.session.universalId;
   
@@ -556,34 +556,24 @@ router.get("/pdf1/:id", async (req, res) => {
   }
 });
 
-router.get("/pdf2/:id", async (req, res) => {
+router.get("/pdf2/:encryptedId", async (req, res) => {
   const puppeteer = require("puppeteer");
-  const rasaID = req.params.id;
-  const url = `http://localhost:3005/ejsrasaVanilla/${rasaID}`;
+  const encryptedId = req.params.encryptedId; // Get the encrypted ID from the URL
+
+  // Decrypt the encrypted ID using your decryption function
+  const rasaID = decryptId(encryptedId); // Replace with your decryption function
+
+  if (rasaID === null) {
+    return res.status(400).send("Invalid encrypted ID");
+  }
+
+  const url = `http://154.41.254.18:3306/ejsrasaVanilla/${rasaID}`;
 
   try {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "load" });
-
-    // Remove the 'disabled' attribute from input elements temporarily
-    const disabledInputs = await page.$$("input[disabled]");
-    for (const input of disabledInputs) {
-      await page.evaluate((el) => {
-        el.removeAttribute("disabled");
-      }, input);
-    }
-
-    // Capture the PDF
     const pdfBuffer = await page.pdf();
-
-    // Set the 'disabled' attribute back after capturing the PDF
-    for (const input of disabledInputs) {
-      await page.evaluate((el) => {
-        el.setAttribute("disabled", "true");
-      }, input);
-    }
-
     await browser.close();
 
     const pdfFileName = `rasa_${rasaID}.pdf`;
@@ -593,18 +583,9 @@ router.get("/pdf2/:id", async (req, res) => {
       fs.mkdirSync(directoryPath, { recursive: true });
     }
     fs.writeFileSync(filePath, pdfBuffer);
-
-    const sql = "UPDATE inputted_table SET pdf = ? WHERE id = ?";
-    db1.query(sql, [pdfFileName, rasaID], function (error, result) {
-      if (error) {
-        console.error(error);
-        res.status(500).send("An error occurred while updating the table");
-      } else {
-        console.log(
-          `PDF successfully generated and saved in pdf-folders. RasaId = ${rasaID}`
-        );
-        res.download(filePath);
-      }
+    res.download(filePath, (error) => {
+      console.log(filePath);
+      fs.unlinkSync(filePath);
     });
   } catch (error) {
     console.error(error);

@@ -57,59 +57,75 @@
                     <th>End Time</th>
                     <th>Rasa Status</th>
                 </tr>
-                <% if(sampleData.length> 0) {
+                <% if(sampleData.length > 0) {
                     sampleData.forEach(function(data) {
                     const eventDay = new Date(data.event_day).toLocaleDateString();
-                    const startTime = new Date(data.start_time).toLocaleTimeString([], { hour: 'numeric', minute:
-                    '2-digit' });
-                    const endTime = new Date(data.end_time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit'
-                    });
+                    const startTime = new Date(data.start_time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+                    const endTime = new Date(data.end_time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
                     const startTimeFormatted = startTime.replace(/(\d{1,2}:\d{2})(:\d{2})/, "$1 $2");
                     const endTimeFormatted = endTime.replace(/(\d{1,2}:\d{2})(:\d{2})/, "$1 $2");
+                    
+                    // Encrypt the data.id before rendering
+                    const encryptedId = encryptId(data.id);
                     %>
                     <tr>
                         <td>
-                            <%=data.id %>
+                            <%= encryptedId %>
                         </td>
                         <td>
-                            <%=data.full_name %>
+                            <%= data.full_name %>
                         </td>
                         <td>
-                            <%=eventDay %>
+                            <%= eventDay %>
                         </td>
                         <td>
-                            <%=data.event_description %>
+                            <%= data.event_description %>
                         </td>
                         <td>
-                            <%=data.start_time %>
+                            <%= data.start_time %>
                         </td>
                         <td>
-                            <%=data.end_time %>
+                            <%= data.end_time %>
                         </td>
                         <td>
-                            <%=data.rasa_status %>
+                            <%= data.rasa_status %>
                         </td>
 
                         <td>
-                            <button class="btn btn-sm btn-primary"
-                                onclick="window.location.href='/pdf1/<%=data.id%>'">Download PDF</button>
-                            <button class="btn btn-sm btn-primary"
-                                onclick="window.location.href='/ejsrasaVanilla/<%=data.id%>'">Open Form</button>
-                        </td>
-
-
+                          <button class="btn btn-sm btn-primary"
+                              onclick="window.location.href='/pdf2/<%= encryptedId %>'">Download PDF</button>
+                          <button class="btn btn-sm btn-primary"
+                              onclick="window.location.href='/ejsrasaVanilla/<%= encryptedId %>'">Open Form</button>
+                      </td>
                     </tr>
                     <% }); } else { %>
                         <tr>
                             <td colspan="5"> No Data Found</td>
                         </tr>
-                        <% } %>
+                    <% } %>
+                </thead>
+                </tbody>
+            </table>
+        </div>
+        <script src="./js/rasa_view.js"></script>
+        
+        <script>    
+            function encryptId(id) {
+            const encryptionKey = 'Testing101';
+            const cipher = crypto.createCipher('aes-256-cbc', encryptionKey);
+            let encryptedId = cipher.update(id, 'utf8', 'hex');
+            encryptedId += cipher.final('hex');
+            return encryptedId;
+          }
 
-            </thead>
-            </tbody>
-        </table>
-    </div>
-    <script src="./js/rasa_view.js"></script>
-</body>
+          function decryptId(encryptedId) {
+            const encryptionKey = 'Testing101';
+            const decipher = crypto.createDecipher('aes-256-cbc', encryptionKey);
+            let decryptedId = decipher.update(encryptedId, 'hex', 'utf8');
+            decryptedId += decipher.final('utf8');
+            return decryptedId;
+          }
 
+        </script>
+    </body>
 </html>
