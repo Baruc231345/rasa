@@ -432,32 +432,38 @@ router.get("/rasaview/:id", (req, res) => {
   const hashedId = req.params.id; 
   const universalId = req.session.universalId;
 
-  // Decrypt the hashed ID to get the user's actual ID
-  const originalId = decryptId(hashedId);
+  try {
+    // Decrypt the hashed ID to get the user's actual ID
+    const originalId = decryptId(hashedId);
 
-  // Parse the original ID to ensure it's a valid integer
-  const userId = parseInt(originalId, 10);
+    // Parse the original ID to ensure it's a valid integer
+    const userId = parseInt(originalId, 10);
 
-  // Check if the decrypted user ID matches the session user ID
-  if (isNaN(userId) || userId !== universalId) {
-    res.status(403).send("Access denied: You do not have permission to view this page.");
-    return;
-  }
-
-  const query = "SELECT * FROM inputted_table WHERE user_id = ? ORDER BY id";
-  db1.query(query, [hashedId], (error, data) => {
-    if (error) {
-      throw error;
-    } else {
-      res.render("rasa_view", {
-        title: "Node.js MySQL CRUD Application",
-        action: "list",
-        sampleData: data,
-        id: userId, // The decrypted user ID
-        hashedId: hashedId, // The hashed user ID
-      });
+    // Check if the decrypted user ID matches the session user ID
+    if (isNaN(userId) || userId !== universalId) {
+      res.status(403).send("Access denied: You do not have permission to view this page.");
+      return;
     }
-  });
+
+    // Continue processing with the decrypted user ID
+    // ...
+
+    // Example: Fetch data based on the decrypted userId
+    const query = "SELECT * FROM your_table WHERE user_id = ?";
+    db1.query(query, [userId], (error, data) => {
+      if (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("Error fetching data.");
+      } else {
+        // Process and render data
+        res.render("your_view", { data, userId });
+      }
+    });
+
+  } catch (error) {
+    console.error("Decryption error:", error);
+    res.status(500).send("Error decrypting the ID.");
+  }
 });
 
 router.get("/calendar", (req, res) => {
