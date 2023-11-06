@@ -431,6 +431,8 @@ router.post("/api/updateAuthenticated/:id", (req, res) => {
 router.get("/rasaview/:id", (req, res) => {
   const hashedId = req.params.id; 
   const universalId = req.session.universalId;
+  let originalId; // Declare originalId variable
+  let userId;     // Declare userId variable
 
   try {
     // Decrypt the hashed ID to get the user's actual ID
@@ -438,11 +440,9 @@ router.get("/rasaview/:id", (req, res) => {
 
     console.log("hashedId:", hashedId);
     console.log("originalId after decryption:", originalId);
+        // Parse the original ID to ensure it's a valid integer
+        const userId = parseInt(originalId, 10);
     console.log("userid: ", userId)
-
-
-    // Parse the original ID to ensure it's a valid integer
-    const userId = parseInt(originalId, 10);
 
     // Check if the decrypted user ID matches the session user ID
     if (isNaN(userId) || userId !== universalId) {
