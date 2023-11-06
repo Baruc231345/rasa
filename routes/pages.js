@@ -428,19 +428,23 @@ router.post("/api/updateAuthenticated/:id", (req, res) => {
 });
 
 router.get("/rasaview/:id", (req, res) => {
-  const paramId = parseInt(req.params.id, 10); // Parse to integer with base 10
-  const userId = parseInt(req.session.universalId, 10); // Parse to integer with base 10
+  const hashedId = req.params.id; 
+  const universalId = req.session.universalId;
 
-  // Check if req.session.universalId is not equal to req.params.id
-  if (isNaN(paramId) || isNaN(userId) || userId !== paramId) {
-    res
-      .status(403)
-      .send("Access denied: You do not have permission to view this page.");
+  // Decrypt the hashed ID to get the user's actual ID
+  const originalId = decryptId(hashedId);
+
+  // Parse the original ID to ensure it's a valid integer
+  const userId = parseInt(originalId, 10);
+
+  // Check if the decrypted user ID matches the session user ID
+  if (isNaN(userId) || userId !== universalId) {
+    res.status(403).send("Access denied: You do not have permission to view this page.");
     return;
   }
 
-  var query = "SELECT * FROM inputted_table WHERE user_id = ? ORDER BY id";
-  db1.query(query, [userId], function (error, data) {
+  const query = "SELECT * FROM inputted_table WHERE user_id = ? ORDER BY id";
+  db1.query(query, [hashedId], (error, data) => {
     if (error) {
       throw error;
     } else {
@@ -448,7 +452,8 @@ router.get("/rasaview/:id", (req, res) => {
         title: "Node.js MySQL CRUD Application",
         action: "list",
         sampleData: data,
-        id: userId
+        id: userId, // The decrypted user ID
+        hashedId: hashedId, // The hashed user ID
       });
     }
   });
