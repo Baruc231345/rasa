@@ -8,6 +8,12 @@ const rasatesting2_inventory = async (req, res,) => {
     other, other_quantity, blackpanel, blackpanel_quantity, whiteboard, whiteboard_quantity, aircon, 
     start_aircon, end_aircon} = req.body;
 
+  const columnsWithQuantity = ['sound_system_quantity', 'microphone_quantity', 'lcd_quantity', 'widescreen_quantity', 'chair_quantity', 'table_quantity', 'other_quantity', 'blackpanel_quantity', 'whiteboard_quantity'];
+  const dataToInsert = {};
+  columnsWithQuantity.forEach((column) => {
+    dataToInsert[column] = parseInt(req.body[column], 10) || 0;
+  });
+
   const soundSystemValue = sound_system || 0;
   try {
     const results = await new Promise((resolve, reject) => {
