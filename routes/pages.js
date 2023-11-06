@@ -462,6 +462,7 @@ router.get("/rasaview/:id", (req, res) => {
 
   } catch (error) {
     console.error("Decryption error:", error);
+    console.log("error");
     console.log("hashedId:", hashedId);
     console.log("originalId after decryption:", originalId);
     console.log("userid: ", userId)
