@@ -573,16 +573,16 @@ router.get("/pdf1/:id", async (req, res) => {
   }
 });
 
-router.get("/pdf2/:hashedId", async (req, res) => {
+router.get("/pdf2/:encryptedId", async (req, res) => {
   const puppeteer = require("puppeteer");
-  const hashedId = req.params.hashedId;
-  const rasaID = decryptId(hashedId);
+  const encryptedId = req.params.encryptedId;
+  const decryptId = decryptId(encryptedId);
 
-  if (rasaID === null) {
+  if (decryptId === null) {
     return res.status(400).send("Invalid encrypted ID");
   }
 
-  const url = `http://154.41.254.18:3306/ejsrasaVanilla/${rasaID}`;
+  const url = `http://154.41.254.18:3306/ejsrasaVanilla/${decryptId}`;
 
   try {
     const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
