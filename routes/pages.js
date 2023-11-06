@@ -92,13 +92,9 @@ router.get(
   loggedIn,
   dashboardAccessMiddleware,
   (req, res) => {
-    const id = req.params.id; // Get the 'id' parameter from the route
-
-    // Assuming you have a user session, set the 'universalId' in the session
+    const id = req.params.id;
     req.session.universalId = id;
-
-    res.render("dashboard_regular", { id }); // Pass 'id' to the template if needed
-
+    res.render("dashboard_regular", { id });
     console.log(id + " route /dashboardRegular/:id");
   }
 );
