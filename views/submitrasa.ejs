@@ -275,7 +275,7 @@
             </div>
             <div class="buttons">
               <button type="submit" id="btnSubmit">Submit</button>
-              <button type="button" id="btnBack" onclick="handleClick()">Back</button>
+              <button type="button" id="btnBack">Back</button>
             </div>
           </div>
           <div class="form fourth" style="height: 500px;">
@@ -302,11 +302,11 @@
   
       </form>
 </body>
-<script>const universalId = <%= JSON.stringify(universalId) %>;
-
-  function handleClick() {
-    window.location.href = "/rasa"
-  }
+<script>
+const universalId = <%= JSON.stringify(universalId) %>;
+document.getElementById('btnBack').addEventListener('click', function () {
+  window.location.href = "/rasa";
+});
 
   function formatDate() {
     const eventDayInput = document.getElementById("event_day");
