@@ -449,11 +449,6 @@ router.get("/rasaview/:id", (req, res) => {
       res.status(403).send("Access denied: You do not have permission to view this page.");
       return;
     }
-
-    // Continue processing with the decrypted user ID
-    // ...
-
-    // Example: Fetch data based on the decrypted userId
     const query = "SELECT * FROM your_table WHERE user_id = ?";
     db1.query(query, [userId], (error, data) => {
       if (error) {
@@ -467,6 +462,9 @@ router.get("/rasaview/:id", (req, res) => {
 
   } catch (error) {
     console.error("Decryption error:", error);
+    console.log("hashedId:", hashedId);
+    console.log("originalId after decryption:", originalId);
+    console.log("userid: ", userId)
     res.status(500).send("Error decrypting the ID.");
   }
 });
