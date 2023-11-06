@@ -439,12 +439,11 @@ router.get("/rasaview/:id", (req, res) => {
     console.log("encryptedId", encryptedId);
     console.log("decryptedId:", decryptedId);
     
-    // Check if the decrypted user ID matches the session user ID
     if (isNaN(decryptedId) || decryptedId !== universalId) {
       res.status(403).send("Access denied: You do not have permission to view this page.");
       return;
     }
-    const query = "SELECT * FROM your_table WHERE user_id = ?";
+    const query = "SELECT * FROM inputted_table WHERE user_id = ?";
     db1.query(query, [hashedId], (error, data) => {
       if (error) {
         console.error("Error fetching data:", error);
