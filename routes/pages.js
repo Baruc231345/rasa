@@ -431,33 +431,34 @@ router.post("/api/updateAuthenticated/:id", (req, res) => {
 router.get("/rasaview/:id", (req, res) => {
   const hashedId = req.params.id; 
   const universalId = req.session.universalId;
-  let originalId; // Declare originalId variable
-  let userId;     // Declare userId variable
+  const encryptedId= encryptId(hashedId);
+  const decryptedId = decryptId(encryptedId);
 
   try {
-    // Decrypt the hashed ID to get the user's actual ID
-    originalId = decryptId(hashedId); // Remove 'const' to assign value to the outer variables
-
     console.log("hashedId:", hashedId);
-    console.log("originalId after decryption:", originalId);
+    console.log("encryptedId", encryptedId);
+    console.log("decryptedId:", decryptedId);
     
-    // Parse the original ID to ensure it's a valid integer
-    userId = parseInt(originalId, 10);
-    console.log("userid: ", userId)
-
     // Check if the decrypted user ID matches the session user ID
-    if (isNaN(userId) || userId !== universalId) {
+    if (isNaN(decryptedId) || decryptedId !== universalId) {
       res.status(403).send("Access denied: You do not have permission to view this page.");
       return;
     }
     const query = "SELECT * FROM your_table WHERE user_id = ?";
-    db1.query(query, [userId], (error, data) => {
+    db1.query(query, [hashedId], (error, data) => {
       if (error) {
         console.error("Error fetching data:", error);
         res.status(500).send("Error fetching data.");
       } else {
         // Process and render data
-        res.render("your_view", { data, userId });
+        res.render("rasa_view", {
+          title: "Node.js MySQL CRUD Application",
+          action: "list",
+          sampleData: data,
+          id: hashedId,
+          encryptedId: encryptedId,
+          decryptedId: decryptedId,
+        });
       }
     });
 

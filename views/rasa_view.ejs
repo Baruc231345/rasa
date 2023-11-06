@@ -64,9 +64,6 @@
                       const endTime = new Date(data.end_time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
                       const startTimeFormatted = startTime.replace(/(\d{1,2}:\d{2})(:\d{2})/, "$1 $2");
                       const endTimeFormatted = endTime.replace(/(\d{1,2}:\d{2})(:\d{2})/, "$1 $2");
-
-                      // Encrypt the data.id before rendering
-                      const encryptedId = encryptId(data.id);
                       %>
                       <tr>
                         <td>
@@ -92,9 +89,9 @@
                       </td>
                       <td>
                           <button class="btn btn-sm btn-primary"
-                              onclick="window.location.href='/pdf2/<%= data.hashedId %>'">Download PDF</button>
+                              onclick="window.location.href='/pdf2/<%= data.encryptedId %>'">Download PDF</button>
                           <button class="btn btn-sm btn-primary"
-                              onclick="window.location.href='/ejsrasaVanilla/<%= data.hashedId %>'">Open Form</button>
+                              onclick="window.location.href='/ejsrasaVanilla/<%= data.encryptedId %>'">Open Form</button>
                       </td>
                       </td>
                       </tr>
