@@ -6,44 +6,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/rasa_view.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Rasa View</title>
 </head>
 
 <body id="hometab">
     <div class="wrapper">
         <nav class="sidebar">
-          <div class="navbar">   
-          <h1 id="homepagetext"><span id="menu" class="material-symbols-outlined">menu</span>Dashboard</h1>  
-            <ul id="list">
-              <li>
-                <a href="/dashboardRegular/<%= id %>"><span class="material-symbols-outlined">home</span>
-                  <h4>Home</h4>
-                </a>
-              </li>
+            <div class="navbar">
+                <h1 id="homepagetext"><span id="menu" class="material-symbols-outlined">menu</span>Dashboard</h1>
+                <ul id="list">
+                    <li>
+                        <a href="/dashboardRegular/<%= id %>"><span class="material-symbols-outlined">home</span>
+                            <h4>Home</h4>
+                        </a>
+                    </li>
 
-              <li>
-                <a href="/rasa"><span class="material-symbols-outlined">list_alt</span>
-                  <h4>RASA</h4>
-                </a>
-              </li>
-  
-              <li>
-                <a href="/rasaview/<%= id %>"><span class="material-symbols-outlined">list_alt</span>
-                  <h4>RASA Status</h4>
-                </a>
-              </li>
-                
-              <li>
-                <a href="/logout"><span class="material-symbols-outlined">logout</span>
-                  <h4>Logout</h4>
-                </a>
-              </li>
-            </ul>
-          </div>
+                    <li>
+                        <a href="/rasa"><span class="material-symbols-outlined">list_alt</span>
+                            <h4>RASA</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/rasaview/<%= id %>"><span class="material-symbols-outlined">list_alt</span>
+                            <h4>RASA Status</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/logout"><span class="material-symbols-outlined">logout</span>
+                            <h4>Logout</h4>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </nav>
-      </div>
-      
+    </div>
+
     <div class="container">
         <h2>Title: Rasa View</h2>
         <table id="user-table">
@@ -64,11 +64,13 @@
                     const endTime = new Date(data.end_time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
                     const startTimeFormatted = startTime.replace(/(\d{1,2}:\d{2})(:\d{2})/, "$1 $2");
                     const endTimeFormatted = endTime.replace(/(\d{1,2}:\d{2})(:\d{2})/, "$1 $2");
-                    
+
+                    // Encrypt the data.id before rendering
+                    const encryptedId = encryptId(data.id);
                     %>
                     <tr>
                         <td>
-                            <%= data.id %>
+                            <%= encryptedId %>
                         </td>
                         <td>
                             <%= data.full_name %>
@@ -90,11 +92,11 @@
                         </td>
 
                         <td>
-                          <button class="btn btn-sm btn-primary"
-                              onclick="window.location.href='/pdf2/<%= encryptedId %>'">Download PDF</button>
-                          <button class="btn btn-sm btn-primary"
-                              onclick="window.location.href='/ejsrasaVanilla/<%= encryptedId %>'">Open Form</button>
-                      </td>
+                            <button class="btn btn-sm btn-primary"
+                                onclick="window.location.href='/pdf2/<%= encryptedId %>'">Download PDF</button>
+                            <button class="btn btn-sm btn-primary"
+                                onclick="window.location.href='/ejsrasaVanilla/<%= encryptedId %>'">Open Form</button>
+                        </td>
                     </tr>
                     <% }); } else { %>
                         <tr>
@@ -105,25 +107,15 @@
                 </tbody>
             </table>
         </div>
-        <script src="./js/rasa_view.js"></script>
-        
-        <script>    
+        <script>
             function encryptId(id) {
-            const encryptionKey = 'Testing101';
-            const cipher = crypto.createCipher('aes-256-cbc', encryptionKey);
-            let encryptedId = cipher.update(id, 'utf8', 'hex');
-            encryptedId += cipher.final('hex');
-            return encryptedId;
-          }
-
-          function decryptId(encryptedId) {
-            const encryptionKey = 'Testing101';
-            const decipher = crypto.createDecipher('aes-256-cbc', encryptionKey);
-            let decryptedId = decipher.update(encryptedId, 'hex', 'utf8');
-            decryptedId += decipher.final('utf8');
-            return decryptedId;
-          }
-
+                const encryptionKey = 'Testing101';
+                const crypto = require('crypto');
+                const cipher = crypto.createCipher('aes-256-cbc', encryptionKey);
+                let encryptedId = cipher.update(id.toString(), 'utf8', 'hex');
+                encryptedId += cipher.final('hex');
+                return encryptedId;
+            }
         </script>
     </body>
 </html>
