@@ -22,7 +22,6 @@ app.use(express.urlencoded({ extended: true }));
 
 console.log(__dirname);
 
-// decryption and encryption
 function encryptId(id) {
   const encryptionKey = 'Testing101';
   const cipher = crypto.createCipher('aes-256-cbc', encryptionKey);
@@ -93,14 +92,14 @@ router.get(
   loggedIn,
   dashboardAccessMiddleware,
   (req, res) => {
-    const universalId = req.session.universalId; // Retrieve the universalId from the session
+    const id = req.params.id; // Get the 'id' parameter from the route
 
-    if (!universalId) {
-      return res.status(400).send("Universal ID not found in the session");
-    }
+    // Assuming you have a user session, set the 'universalId' in the session
+    req.session.universalId = id;
 
-    res.render("dashboard_regular", { id: universalId });
-    console.log(universalId + " route /dashboardRegular/:id");
+    res.render("dashboard_regular", { id }); // Pass 'id' to the template if needed
+
+    console.log(id + " route /dashboardRegular/:id");
   }
 );
 
