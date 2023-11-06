@@ -436,6 +436,11 @@ router.get("/rasaview/:id", (req, res) => {
     // Decrypt the hashed ID to get the user's actual ID
     const originalId = decryptId(hashedId);
 
+    console.log("hashedId:", hashedId);
+    console.log("originalId after decryption:", originalId);
+    console.log("userid: ", userId)
+
+
     // Parse the original ID to ensure it's a valid integer
     const userId = parseInt(originalId, 10);
 
