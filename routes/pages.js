@@ -16,25 +16,25 @@ const db1 = require("../routes/rasa-db");
 const { default: puppeteer } = require("puppeteer");
 const storage = multer.memoryStorage();
 const crypto = require('crypto'); 
-let universalId = null;
+const encryptionKey = crypto.randomBytes(32);
 router.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 
 console.log(__dirname);
 
 function encryptId(id) {
-  const encryptionKey = 'Testing101';
-  const iv = Buffer.alloc(16, 0); // Initialization vector
-  const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(encryptionKey), iv);
+  const encryptionKey = crypto.randomBytes(32); // 32-byte (256-bit) random key
+  const iv = crypto.randomBytes(16); // Initialization vector
+  const cipher = crypto.createCipheriv('aes-256-cbc', encryptionKey, iv);
   let encryptedId = cipher.update(id.toString(), 'utf8', 'hex');
   encryptedId += cipher.final('hex');
   return encryptedId;
 }
 
 function decryptId(encryptedId) {
-  const encryptionKey = 'Testing101';
-  const iv = Buffer.alloc(16, 0); // Initialization vector
-  const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(encryptionKey), iv);
+  const encryptionKey = crypto.randomBytes(32); // 32-byte (256-bit) random key
+  const iv = crypto.randomBytes(16); // Initialization vector
+  const decipher = crypto.createDecipheriv('aes-256-cbc', encryptionKey, iv);
   let decryptedId = decipher.update(encryptedId, 'hex', 'utf8');
   decryptedId += decipher.final('utf8');
   return decryptedId;

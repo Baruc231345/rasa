@@ -109,14 +109,15 @@
               </table>
           </div>
           <script>
-            function encryptId(id) {
-              const encryptionKey = 'Testing101';
-              const iv = Buffer.alloc(16, 0); // Initialization vector
-              const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(encryptionKey), iv);
-              let encryptedId = cipher.update(id.toString(), 'utf8', 'hex');
-              encryptedId += cipher.final('hex');
-              return encryptedId;
-            }
+          
+          function encryptId(id) {
+            const encryptionKey = crypto.randomBytes(32); // 32-byte (256-bit) random key
+            const iv = crypto.randomBytes(16); // Initialization vector
+            const cipher = crypto.createCipheriv('aes-256-cbc', encryptionKey, iv);
+            let encryptedId = cipher.update(id.toString(), 'utf8', 'hex');
+            encryptedId += cipher.final('hex');
+            return encryptedId;
+          }
           </script>
       </body>
   </html>
