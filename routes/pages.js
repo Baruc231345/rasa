@@ -591,7 +591,7 @@ router.get("/pdf2/:encryptedId", async (req, res) => {
     const pdfBuffer = await page.pdf();
     await browser.close();
 
-    const pdfFileName = `rasa_${rasaID}.pdf`;
+    const pdfFileName = `rasa_${decryptedId}.pdf`;
     const filePath = path.join(__dirname, "public", "pdf-folders", pdfFileName);
     const directoryPath = path.join(__dirname, "public", "pdf-folders");
     if (!fs.existsSync(directoryPath)) {
