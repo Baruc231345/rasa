@@ -699,7 +699,7 @@ router.get("/approve/:id", (req, res) => {
 });
 
 async function generatePDF(id) {
-  const puppeteer = ("puppeteer");
+  const puppeteer = require("puppeteer");
   const url = `hhttp://154.41.254.18:3306/ejsrasaVanilla/${id}`;
 
   try {
