@@ -700,7 +700,7 @@ router.get("/approve/:id", (req, res) => {
 
 async function generatePDF(id) {
   const puppeteer = require("puppeteer");
-  const url = `hhttp://154.41.254.18:3306/ejsrasaVanilla/${id}`;
+  const url = `http://154.41.254.18:3306/ejsrasaVanilla/${id}`;
 
   try {
     const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
@@ -912,7 +912,9 @@ router.get("/verification2/:hashedId", async (req, res) => {
                 service: "hotmail",
                 auth: {
                   user: "processtest2@outlook.ph",
-                  pass: "Capstone2!",
+                  //pass: "VTMUS-AD5RG-KUSCA-JMF5K-TRDNB",
+                  pass: "cwbomrdgiphyvvnz",
+                  //pass: "Capstone2!",
                 },
               });
 
@@ -991,7 +993,7 @@ router.get("/getSignature/:id", async (req, res) => {
 
       console.log("form_sign updated successfully");
       const puppeteer = require("puppeteer");
-      const url = `hhttp://154.41.254.18:3306/ejsrasaVanilla/${rasaID}`;
+      const url = `http://154.41.254.18:3306/ejsrasaVanilla/${rasaID}`;
 
       try {
         const browser = await puppeteer.launch({ headless: true });
