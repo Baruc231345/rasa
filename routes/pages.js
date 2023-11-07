@@ -173,6 +173,7 @@ router.get("/ejsrasaVanilla2/:encryptedId", (req, res) => {
   const universalId = req.session.universalId;
   
   const rasaID = decryptId(hashedId);
+  console.log("A");
   console.log("hashedId =" + hashedId);
   console.log("original id from parameters = " + rasaID);
   
@@ -194,7 +195,7 @@ router.get("/ejsrasaVanilla2/:encryptedId", (req, res) => {
               const datainventory = data2[0];
               res.locals.rasaID = rasaID; 
               res.render("submitrasaCopy", {
-                rasaID: originalId,
+                rasaID: rasaID,
                 datainputted,
                 datainventory,
                 universalId,
