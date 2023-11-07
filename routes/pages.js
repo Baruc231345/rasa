@@ -700,7 +700,7 @@ router.get("/approve/:id", (req, res) => {
 
 async function generatePDF(id) {
   const puppeteer = require("puppeteer");
-  const url = `http://154.41.254.18:3306/ejsrasaVanilla/${id}`;
+  const url = `hhttp://154.41.254.18:3306/ejsrasaVanilla/${id}`;
 
   try {
     const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
@@ -781,7 +781,9 @@ router.get("/verification/:id", async (req, res) => {
       service: "hotmail",
       auth: {
         user: "processtest2@outlook.ph",
-        pass: "Capstone2!",
+        //pass: "VTMUS-AD5RG-KUSCA-JMF5K-TRDNB",
+        pass: "cwbomrdgiphyvvnz",
+        //pass: "Capstone2!",
       },
     });
 
