@@ -431,18 +431,17 @@ router.post("/api/updateAuthenticated/:id", (req, res) => {
 router.get("/rasaview/:id", (req, res) => {
   const hashedId = req.params.id; 
   const universalId = req.session.universalId;
-  const encryptedId= encryptId(hashedId);
-  const decryptedId = decryptId(encryptedId);
+  const encryptedId = encryptId(hashedId); // Encrypt the hashedId
 
   try {
     console.log("hashedId:", hashedId);
     console.log("encryptedId", encryptedId);
-    console.log("decryptedId:", decryptedId);
     
     if (isNaN(decryptedId) || decryptedId !== universalId) {
       res.status(403).send("Access denied: You do not have permission to view this page.");
       return;
     }
+    
     const query = "SELECT * FROM inputted_table WHERE user_id = ?";
     db1.query(query, [hashedId], (error, data) => {
       if (error) {
@@ -450,13 +449,20 @@ router.get("/rasaview/:id", (req, res) => {
         res.status(500).send("Error fetching data.");
       } else {
         // Process and render data
+        const sampleData = data.map(item => {
+          // Encrypt each data.id before sending it to the template
+          return {
+            ...item,
+            encryptedId: encryptId(item.id),
+          };
+        });
+        
         res.render("rasa_view", {
           title: "Node.js MySQL CRUD Application",
           action: "list",
-          sampleData: data,
+          sampleData: sampleData,
           id: hashedId,
           encryptedId: encryptedId,
-          decryptedId: decryptedId,
         });
       }
     });
