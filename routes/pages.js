@@ -432,12 +432,13 @@ router.get("/rasaview/:id", (req, res) => {
   const hashedId = req.params.id; 
   const universalId = req.session.universalId;
   const encryptedId = encryptId(hashedId); // Encrypt the hashedId
+  const originalId = decryptId(encryptedId);
 
   try {
     console.log("hashedId:", hashedId);
     console.log("encryptedId", encryptedId);
     
-    if (isNaN(decryptedId) || decryptedId !== universalId) {
+    if (isNaN(hashedId) || hashedId !== universalId) {
       res.status(403).send("Access denied: You do not have permission to view this page.");
       return;
     }
