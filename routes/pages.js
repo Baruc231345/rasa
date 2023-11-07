@@ -576,13 +576,13 @@ router.get("/pdf1/:id", async (req, res) => {
 router.get("/pdf2/:encryptedId", async (req, res) => {
   const puppeteer = require("puppeteer");
   const encryptedId = req.params.encryptedId;
-  const decryptId = decryptId(encryptedId);
+  const decryptedId = decryptId(encryptedId);
 
-  if (decryptId === null) {
+  if (decryptedId === null) {
     return res.status(400).send("Invalid encrypted ID");
   }
 
-  const url = `http://154.41.254.18:3306/ejsrasaVanilla/${decryptId}`;
+  const url = `http://154.41.254.18:3306/ejsrasaVanilla/${decryptedId}`;
 
   try {
     const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
