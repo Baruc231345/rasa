@@ -700,7 +700,7 @@ router.get("/approve/:id", (req, res) => {
 
 async function generatePDF(id) {
   const puppeteer = require("puppeteer");
-  const url = `hhttp://154.41.254.18:3306/ejsrasaVanilla/${id}`;
+  const url = `http://154.41.254.18:3306/ejsrasaVanilla/${id}`;
 
   try {
     const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
