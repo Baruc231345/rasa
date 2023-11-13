@@ -606,36 +606,43 @@ form .backBtn2 i {
     margin-left: 10px; /* Adjust the desired amount of top margin */
 }
 
-.form.fourth {
+.signature-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.signature-column {
+    flex: 1;
+}
+
+.signature-container {
+    width: 200px;
+    height: 150px;
+    border-bottom: 3px solid;
+    margin-bottom: 10px;
+    position: relative;
     display: flex;
     flex-direction: column;
-    padding-top: 90px;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    margin-left: 90px;
 }
 
-#form_sign {
-    width: 200px;
-    height: 150px;
-    background-position: center;
-    background-size: cover;
-    border-bottom: 3px solid rgb(0, 0, 0);
-    margin-bottom: 4px;
+canvas {
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    position: absolute;
 }
 
-#form_sign2 {
-    width: 200px;
-    height: 150px;
-    background-position: center;
-    background-size: cover;
-    border-bottom: 3px solid rgb(0, 0, 0);
-    margin-bottom: 4px;
-}
-
-#text_signature {
-    padding-left: 120px;
-}
-
-#text_signature2 {
-    padding-left: 120px;
+.form_sign,
+.form_sign2,
+.form_sign3,
+.form_sign4,
+.form_sign5,
+.form_sign6 {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 #requestor_type.long-input {

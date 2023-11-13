@@ -90,9 +90,7 @@
 
 
         <div class="mid">
-          <div class="top" style="
-          width: 450px;
-      ">
+          <div class="top" style="width: 450px;">
             <span class="title">Facilities Needed</span>
             <p class="text">Here is the list of facilities you have selected:</p>
             <ul class="facility-list">
@@ -171,29 +169,54 @@
         </div>
             </div>
           </div>
-          <div class="form fourth" style="height: 500px;">
-            <% if (datainputted.form_sign) { %>
-              <div id="form_sign">
-                <img src="data:image/png;base64, <%= datainputted.form_sign.toString('base64') %>" >
-                <div id="text_signature">Venue Approval</div>
-              </div>
-            <% } else { %>
-              <div id="form_sign"></div>
-              <div id="text_signature">Venue Approval</div>
-            <% } %>
-            
-            <% if (datainputted.form_sign2) { %>
-              <div id="form_sign2">
-                <img src="data:image/png;base64, <%= datainputted.form_sign2.toString('base64') %>" >
-                <div id="text_signature2">Osa Approval</div>
-              </div>
-            <% } else { %>
-              <div id="form_sign2"></div>
-              <div id="text_signature2">Osa Approval</div>
-            <% } %>
-          </div>
+          <div class="signature-form">
+            <div class="signature-column">
+              <div class="signature-container">
 
-          <div id="selectedItems"></div>
+                <canvas id="form_sign" width="200" height="150"></canvas>
+            </div>
+                <div class="form_sign">
+                    <div id="form_sign">Venue Approval</div>
+                </div>
+        
+                <div class="signature-container">
+                    <canvas id="form_sign2" width="200" height="150"></canvas>
+                </div>
+                <div class="form_sign2">
+                    <div id="form_sign2">MIS/IT Approval</div>
+                </div>
+        
+                <div class="signature-container">
+                    <canvas id="form_sign3" width="200" height="150"></canvas>
+                </div>
+                <div class="form_sign3">
+                    <div id="form_sign3">Endorsed By</div>
+                </div>
+            </div>
+        
+            <div class="signature-column">
+                <div class="signature-container">
+                    <canvas id="form_sign4" width="200" height="150"></canvas>
+                </div>
+                <div class="form_sign4">
+                    <div id="form_sign4">OSA Approval</div>
+                </div>
+        
+                <div class="signature-container">
+                    <canvas id="form_sign5" width="200" height="150"></canvas>
+                </div>
+                <div class="form_sign5">
+                    <div id="form_sign5">Academic Head Approval</div>
+                </div>
+        
+                <div class="signature-container">
+                    <canvas id="form_sign6" width="200" height="150"></canvas>
+                </div>
+                <div class="form_sign6">
+                    <div id="form_sign6">School Administrator Approval</div>
+                </div>
+            </div>
+        </div>
 
   
       </form>

@@ -302,14 +302,53 @@
               </div>
             </div>
           </div>
-          <div class="form fourth" style="height: 500px;">
-            <div id="form_sign"></div>
-            <div id="text_signature">Venue Approval</div>
-            <div id="form_sign2">
-              <div id="form_sign2"></div>
-              <div id="text_signature2">OSA Approval</div>
+          <div class="signature-form">
+            <div class="signature-column">
+                <div class="signature-container">
+                    <canvas id="form_sign" width="200" height="150"></canvas>
+                </div>
+                <div class="form_sign">
+                    <div id="form_sign">Venue Approval</div>
+                </div>
+        
+                <div class="signature-container">
+                    <canvas id="form_sign2" width="200" height="150"></canvas>
+                </div>
+                <div class="form_sign2">
+                    <div id="form_sign2">MIS/IT Approval</div>
+                </div>
+        
+                <div class="signature-container">
+                    <canvas id="form_sign3" width="200" height="150"></canvas>
+                </div>
+                <div class="form_sign3">
+                    <div id="form_sign3">Endorsed By</div>
+                </div>
             </div>
-          </div>
+        
+            <div class="signature-column">
+                <div class="signature-container">
+                    <canvas id="form_sign4" width="200" height="150"></canvas>
+                </div>
+                <div class="form_sign4">
+                    <div id="form_sign4">OSA Approval</div>
+                </div>
+        
+                <div class="signature-container">
+                    <canvas id="form_sign5" width="200" height="150"></canvas>
+                </div>
+                <div class="form_sign5">
+                    <div id="form_sign5">Academic Head Approval</div>
+                </div>
+        
+                <div class="signature-container">
+                    <canvas id="form_sign6" width="200" height="150"></canvas>
+                </div>
+                <div class="form_sign6">
+                    <div id="form_sign6">School Administrator Approval</div>
+                </div>
+            </div>
+        </div>
         </form>
       </div>
     </div>
@@ -474,7 +513,7 @@
       const chairInput = document.getElementById("chair_input");
       const tableInput = document.getElementById("table_input");
       const otherInput = document.getElementById('otherInput');
-
+      const whiteboardInput = document.getElementById("whiteboard_input");
       const blackpanel = document.getElementById("myRadioId-3");
       const blackpanelInput = document.getElementById("black-panel_input");
       blackpanel.addEventListener("change", () => {
