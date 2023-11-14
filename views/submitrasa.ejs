@@ -142,29 +142,31 @@
               <% } %>
             </ul>
           
-            <div class="fields5">
-              <h3 class="equipment-section">Bag</h3>
-              <ul class="equipment-list">
-                <% if (datainventory.chair === 1) { %>
-                  <li><span class="check-symbol">✔</span> <span class="selected-equipment">Chair/s</span> - <%= datainventory.chair_quantity %></li>
-                <% } %>
-                <% if (datainventory.table_input === 1) { %>
-                  <li><span class="check-symbol">✔</span> <span class="selected-equipment">Table/s</span> - <%= datainventory.table_quantity %></li>
-                <% } %>
-                <% if (datainventory.blackpanel === 1) { %>
-                  <li><span class="check-symbol">✔</span> <span class="selected-equipment">Black Panel</span> - <%= datainventory.blackpanel_quantity %></li>
-                <% } %>
-                <% if (datainventory.whiteboard === 1) { %>
-                  <li><span class="check-symbol">✔</span> <span class="selected-equipment">Whiteboard</span> - <%= datainventory.whiteboard_quantity %></li>
-                <% } %>
-                <% if (datainventory.aircon === 1) { %>
-                  <li><span class="check-symbol">✔</span> <span class="selected-equipment">Aircon Time</span> - <%= datainventory.start_aircon %> To <%= datainventory.end_aircon %></li>
-                <% } %>
-                <% if (datainventory.other === 1) { %>
-                  <li><span class="check-symbol">✔</span> <span class="selected-equipment">Other: <%= datainventory.other_quantity %></span></li>
-                <% } %>
-              </ul>
-            </div>
+            <% if (datainventory.chair === 1 || datainventory.table_input === 1 || datainventory.blackpanel === 1 || datainventory.whiteboard === 1 || datainventory.aircon === 1 || datainventory.other === 1) { %>
+              <div class="fields5">
+                <h3 class="equipment-section">Bag</h3>
+                <ul class="equipment-list">
+                  <% if (datainventory.chair === 1) { %>
+                    <li><span class="check-symbol">✔</span> <span class="selected-equipment">Chair/s</span> - <%= datainventory.chair_quantity %></li>
+                  <% } %>
+                  <% if (datainventory.table_input === 1) { %>
+                    <li><span class="check-symbol">✔</span> <span class="selected-equipment">Table/s</span> - <%= datainventory.table_quantity %></li>
+                  <% } %>
+                  <% if (datainventory.blackpanel === 1) { %>
+                    <li><span class="check-symbol">✔</span> <span class="selected-equipment">Black Panel</span> - <%= datainventory.blackpanel_quantity %></li>
+                  <% } %>
+                  <% if (datainventory.whiteboard === 1) { %>
+                    <li><span class="check-symbol">✔</span> <span class="selected-equipment">Whiteboard</span> - <%= datainventory.whiteboard_quantity %></li>
+                  <% } %>
+                  <% if (datainventory.aircon === 1) { %>
+                    <li><span class="check-symbol">✔</span> <span class="selected-equipment">Aircon Time</span> - <%= datainventory.start_aircon %> To <%= datainventory.end_aircon %></li>
+                  <% } %>
+                  <% if (datainventory.other === 1) { %>
+                    <li><span class="check-symbol">✔</span> <span class="selected-equipment">Other: <%= datainventory.other_quantity %></span></li>
+                  <% } %>
+                </ul>
+              </div>
+            <% } %>
           </div>
         </div>
         <div class="buttons">
