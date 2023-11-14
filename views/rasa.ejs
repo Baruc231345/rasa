@@ -304,51 +304,51 @@
           </div>
           <div class="signature-form">
             <div class="signature-column">
-                <div class="signature-container">
-                    <canvas id="form_sign" width="200" height="150"></canvas>
-                </div>
-                <div class="form_sign">
-                    <div id="form_sign">Venue Approval</div>
-                </div>
-        
-                <div class="signature-container">
-                    <canvas id="form_sign2" width="200" height="150"></canvas>
-                </div>
-                <div class="form_sign2">
-                    <div id="form_sign2">MIS/IT Approval</div>
-                </div>
-        
-                <div class="signature-container">
-                    <canvas id="form_sign3" width="200" height="150"></canvas>
-                </div>
-                <div class="form_sign3">
-                    <div id="form_sign3">Endorsed By</div>
-                </div>
+              <div class="signature-container">
+                <canvas id="form_sign" width="200" height="150"></canvas>
+              </div>
+              <div class="form_sign">
+                <div id="form_sign">Venue Approval</div>
+              </div>
+
+              <div class="signature-container">
+                <canvas id="form_sign2" width="200" height="150"></canvas>
+              </div>
+              <div class="form_sign2">
+                <div id="form_sign2">MIS/IT Approval</div>
+              </div>
+
+              <div class="signature-container">
+                <canvas id="form_sign3" width="200" height="150"></canvas>
+              </div>
+              <div class="form_sign3">
+                <div id="form_sign3">Endorsed By</div>
+              </div>
             </div>
-        
+
             <div class="signature-column">
-                <div class="signature-container">
-                    <canvas id="form_sign4" width="200" height="150"></canvas>
-                </div>
-                <div class="form_sign4">
-                    <div id="form_sign4">OSA Approval</div>
-                </div>
-        
-                <div class="signature-container">
-                    <canvas id="form_sign5" width="200" height="150"></canvas>
-                </div>
-                <div class="form_sign5">
-                    <div id="form_sign5">Academic Head Approval</div>
-                </div>
-        
-                <div class="signature-container">
-                    <canvas id="form_sign6" width="200" height="150"></canvas>
-                </div>
-                <div class="form_sign6">
-                    <div id="form_sign6">School Administrator Approval</div>
-                </div>
+              <div class="signature-container">
+                <canvas id="form_sign4" width="200" height="150"></canvas>
+              </div>
+              <div class="form_sign4">
+                <div id="form_sign4">OSA Approval</div>
+              </div>
+
+              <div class="signature-container">
+                <canvas id="form_sign5" width="200" height="150"></canvas>
+              </div>
+              <div class="form_sign5">
+                <div id="form_sign5">Academic Head Approval</div>
+              </div>
+
+              <div class="signature-container">
+                <canvas id="form_sign6" width="200" height="150"></canvas>
+              </div>
+              <div class="form_sign6">
+                <div id="form_sign6">School Administrator Approval</div>
+              </div>
             </div>
-        </div>
+          </div>
         </form>
       </div>
     </div>
@@ -595,15 +595,24 @@
               ...inventory,
               ...inventory2
             };
+
+            // Iterate through rasatesting_inventory properties
+            for (const key in rasatesting_inventory) {
+              if (rasatesting_inventory.hasOwnProperty(key)) {
+                // Check if the value is falsy (empty or null) and set it to a default value (e.g., 0)
+                rasatesting_inventory[key] = rasatesting_inventory[key] || 0;
+              }
+            }
+
             fetch("/api/rasatesting_inventory", {
               method: "POST",
               body: JSON.stringify(rasatesting_inventory),
               headers: {
-                "Content-type": "application/json"
-              }
+                "Content-type": "application/json",
+              },
             })
-              .then(response => response.json())
-              .catch(error => {
+              .then((response) => response.json())
+              .catch((error) => {
                 console.error(error);
               });
           });
