@@ -103,9 +103,9 @@ router.get(
   }
 );
 
-// Middleware to check for the presence of universalCode in the session
+// Middleware to check for the presence of universalId in the session
 const checkUniversalCodeMiddleware = (req, res, next) => {
-  const universalCode = req.session.universalCode;
+  const universalCode = req.session.universalId;
   console.log(universalCode);
   console.log("test");
 
