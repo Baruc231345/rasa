@@ -59,7 +59,7 @@
               <div class="fields1">
                 <div class="input-field">
                   <label>Full Name</label>
-                  <input type="text" id="full_name" placeholder="Enter your name" >
+                  <input type="text" id="full_name" placeholder="Enter your name">
                 </div>
                 <div class="input-field">
                   <label>Contact Number </label>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="input-field" required>
                   <label>Event Date/Day</label>
-                  <input type="date" id="event_day" value="10/13/2023" onchange="formatDate()">
+                  <input type="date" id="event_day" value="10/13/2023" onchange="formatDate()" style="width: 268px;">
                 </div>
                 <div class="input-field" required>
                   <label for="event_description">Event Description</label>
@@ -115,21 +115,20 @@
 
                 <div class="input-field" style="width: 300px;">
                   <label>Expected Participants</label>
-                  <input type="number" id="participants" placeholder="# of Participants" required>
+                  <input type="number" id="participants" placeholder="# of Participants" required style="width: 268px;">
                 </div>
 
                 <div class="input-field" style="width: 380px;">
                   <label>Required Days</label>
-                  <input type="number" id="required_day" placeholder="Specify the days" required>
+                  <input type="number" id="required_day" placeholder="Specify the days" required style="width: 268px;">
                 </div>
                 <div class="input-field">
                   <label>Start Time</label>
-                  <input type="time" id="start_time" placeholder="include set-up time or ingress" required>
+                  <input type="time" id="start_time" placeholder="include set-up time or ingress" required style="width: 268px;">
                 </div>
                 <div class="input-field">
                   <label for="end_time">End Time</label>
-                  <input type="time" id="end_time" name="end_time" placeholder="Include break-down time or egress"
-                    required>
+                  <input type="time" id="end_time" name="end_time" placeholder="Include break-down time or egress" required style="width: 268px;">
                 </div>
               </div>
               <div class="mid">
@@ -564,7 +563,7 @@
       });
 
       form.addEventListener("submit", () => {
-        
+
         const rasatesting = {
           full_name: full_name1.value,
           event_name: event_name1.value,
