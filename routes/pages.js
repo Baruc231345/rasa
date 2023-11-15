@@ -51,6 +51,20 @@ router.get("/", loggedIn, (req, res, next) => {
   }
 });
 
+// Middleware to check for the presence of universalCode in the session
+const checkUniversalCodeMiddleware = (req, res, next) => {
+  const universalCode = req.session.universalCode;
+
+  // If universalCode is not present, redirect to the root path
+  if (!universalCode) {
+    return res.redirect("/");
+  }
+
+  // If universalCode is present, continue to the next middleware or route handler
+  next();
+};
+
+
 // Middleware to restrict access to /dashboard if not logged in
 const dashboardAccessMiddleware = (req, res, next) => {
   if (req.user) {
