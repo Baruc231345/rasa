@@ -277,7 +277,7 @@ router.get("/editUserView", adminMiddleware, (req, res) => {
   res.sendFile("editUserView.html", { root: "./public" });
 });
 
-router.get("/rasa", (req, res) => {
+router.get("/rasa", loggedIn,(req, res) => {
   const universalId = req.session.universalId;
   res.render("rasa", { id: universalId });
 });
