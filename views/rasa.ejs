@@ -59,7 +59,7 @@
               <div class="fields1">
                 <div class="input-field">
                   <label>Full Name</label>
-                  <input type="text" id="full_name" placeholder="Enter your name" required>
+                  <input type="text" id="full_name" placeholder="Enter your name" >
                 </div>
                 <div class="input-field">
                   <label>Contact Number </label>
@@ -564,10 +564,7 @@
       });
 
       form.addEventListener("submit", () => {
-        const allInputs = document.querySelectorAll('input, select, textarea');
-        allInputs.forEach(input => {
-          input.disabled = false;
-        });
+        
         const rasatesting = {
           full_name: full_name1.value,
           event_name: event_name1.value,
