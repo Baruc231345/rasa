@@ -1,7 +1,7 @@
 const db1 = require("../routes/rasa-db");
 
 const rasatesting2 = async (req, res,) => {
-  const { full_name, event_name, event_description, event_day, start_time, end_time, user_id, contact_number, requestor_information, requestor_type, participants, purpose_objectives, required_day } = req.body;
+  const { full_name, event_name, event_description, event_day, start_time, end_time, user_id, contact_number, authenticated, requestor_information, requestor_type, participants, purpose_objectives, required_day } = req.body;
 
   console.log(full_name);
   console.log(event_name);
@@ -33,7 +33,8 @@ const rasatesting2 = async (req, res,) => {
         participants: participants,
         purpose_objectives: purpose_objectives,
         required_day: required_day,
-        rasa_status: "Pending"
+        rasa_status: "Pending",
+        authenticated: authenticated,
       }, (error, results) => {
         if (error) {
           reject(error);
