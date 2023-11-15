@@ -54,9 +54,12 @@ router.get("/", loggedIn, (req, res, next) => {
 // Middleware to check for the presence of universalCode in the session
 const checkUniversalCodeMiddleware = (req, res, next) => {
   const universalCode = req.session.universalCode;
+  console.log(universalCode);
+  console.log("test");
 
   // If universalCode is not present, redirect to the root path
   if (!universalCode) {
+    req.session.universalId = null;
     return res.redirect("/");
   }
 
