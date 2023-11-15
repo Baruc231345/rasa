@@ -51,21 +51,7 @@ router.get("/", loggedIn, (req, res, next) => {
   }
 });
 
-// Middleware to check for the presence of universalCode in the session
-const checkUniversalCodeMiddleware = (req, res, next) => {
-  const universalCode = req.session.universalCode;
-  console.log(universalCode);
-  console.log("test");
 
-  // If universalCode is not present, redirect to the root path
-  if (!universalCode) {
-    req.session.universalId = null;
-    return res.redirect("/");
-  }
-
-  // If universalCode is present, continue to the next middleware or route handler
-  next();
-};
 
 
 // Middleware to restrict access to /dashboard if not logged in
@@ -117,12 +103,22 @@ router.get(
   }
 );
 
-// Middleware to set universalId
-const setUniversalIdMiddleware = (req, res, next) => {
-  // Set universalId to the desired value (e.g., from session, database, etc.)
-  req.universalId = req.session.universalId; // Example: Get it from the session
+// Middleware to check for the presence of universalCode in the session
+const checkUniversalCodeMiddleware = (req, res, next) => {
+  const universalCode = req.session.universalCode;
+  console.log(universalCode);
+  console.log("test");
+
+  // If universalCode is not present, redirect to the root path
+  if (!universalCode) {
+    req.session.universalId = null;
+    return res.redirect("/");
+  }
+
+  // If universalCode is present, continue to the next middleware or route handler
   next();
 };
+
 
 router.get("/ejsrasa/:id", (req, res) => {
   const rasaID = req.params.id;
