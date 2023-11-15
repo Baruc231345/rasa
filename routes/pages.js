@@ -291,7 +291,7 @@ router.get("/editUserView", adminMiddleware, (req, res) => {
   res.sendFile("editUserView.html", { root: "./public" });
 });
 
-router.get("/rasa", loggedIn,(req, res) => {
+router.get("/rasa", loggedIn, checkUniversalCodeMiddleware, (req, res) => {
   const universalId = req.session.universalId;
   res.render("rasa", { id: universalId });
 });
@@ -443,7 +443,7 @@ router.post("/api/updateAuthenticated/:id", (req, res) => {
   });
 });
 
-router.get("/rasaview/:id", (req, res) => {
+router.get("/rasaview/:id", checkUniversalCodeMiddleware,(req, res) => {
   const hashedId = req.params.id; 
   const universalId = req.session.universalId;
   const encryptedId = encryptId(hashedId); // Encrypt the hashedId
